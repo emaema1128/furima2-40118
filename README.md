@@ -1,24 +1,61 @@
-# README
+## users テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| name               | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
 
-Things you may want to cover:
+### Association
 
-* Ruby version
+has_many :items
+has_many :purchase
 
-* System dependencies
+## items テーブル
 
-* Configuration
+| Column   | Type   | Options     |
+| -------- | ------ | ----------- |
+| title    | string | null: false |
+| explain  | text   | null: false |
+| category | string | null: false |
+| state    | string | null: false |
+| freight  | string | null: false |
+| shipname | string | null: false |
+| shipdate | string | null: false |
+| price    | string | null: false |
+| user_id  | references | null: false, foreign_key: true |
 
-* Database creation
 
-* Database initialization
+### Association
 
-* How to run the test suite
+belongs_to :user
+has_one :purchase
 
-* Services (job queues, cache servers, search engines, etc.)
+## purchase テーブル
 
-* Deployment instructions
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user_id | references | null: false, foreign_key: true |
+| items   | string     | null: false                    |
 
-* ...
+### Association
+
+belongs_to :user
+belongs_to :items
+has_one :shipping
+
+## shipping テーブル
+
+| Column       | Type    | Options      |
+| ------------ | --------| ------------ |
+| postalcode   | string  | null: false  |
+| prefecture   | string  | null: false  |
+| city         | string  | null: false  |
+| address      | string  | null: false  |
+| building     | string  | null: false  |
+| phone_number | string  | null: false  |
+
+
+### Association
+
+belongs_to :purchase
