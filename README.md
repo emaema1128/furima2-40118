@@ -5,25 +5,28 @@
 | name               | string | null: false               |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false               |
+| nickname           | string | null: false               |
+| birthday           | integer | null: false              |
+
 
 ### Association
 
 has_many :items
-has_many :purchase
+has_many :purchases
 
 ## items テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| title    | string | null: false |
-| explain  | text   | null: false |
-| category | string | null: false |
-| state    | string | null: false |
-| freight  | string | null: false |
-| shipname | string | null: false |
-| shipdate | string | null: false |
-| price    | string | null: false |
-| user_id  | references | null: false, foreign_key: true |
+| Column      | Type   | Options     |
+| ----------- | ------ | ----------- |
+| title       | string | null: false |
+| explain     | text   | null: false |
+| category_id | integer | null: false |
+| prefecture_id    | integer | null: false |
+| freight_id  | integer | null: false |
+| shipname_id | integer | null: false |
+| shipdate_id | integer | null: false |
+| price       | integer | null: false |
+| user        | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -31,20 +34,20 @@ has_many :purchase
 belongs_to :user
 has_one :purchase
 
-## purchase テーブル
+## purchases テーブル
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
-| user_id | references | null: false, foreign_key: true |
-| items   | string     | null: false                    |
+| user    | references | null: false, foreign_key: true |
+| item    | string     | null: false, foreign_key: true |
 
 ### Association
 
 belongs_to :user
-belongs_to :items
+belongs_to :item
 has_one :shipping
 
-## shipping テーブル
+## shippings テーブル
 
 | Column       | Type    | Options      |
 | ------------ | --------| ------------ |
@@ -52,8 +55,9 @@ has_one :shipping
 | prefecture   | string  | null: false  |
 | city         | string  | null: false  |
 | address      | string  | null: false  |
-| building     | string  | null: false  |
+| building     | string  |              |
 | phone_number | string  | null: false  |
+| purchase     | string  | null: false, foreign_key: true  |
 
 
 ### Association
