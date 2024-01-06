@@ -6,11 +6,6 @@ class User < ApplicationRecord
   # has_many :items
   # has_many :purchases
   
-<<<<<<< Updated upstream
-    validates :first_name, presence: true
-    validates :last_name, presence: true
-=======
->>>>>>> Stashed changes
     validates :first_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
     validates :last_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
     validates :nickname, presence: true
