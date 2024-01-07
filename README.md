@@ -26,7 +26,7 @@ has_many :purchases
 | category_id | integer | null: false |
 | prefecture_id    | integer | null: false |
 | freight_id  | integer | null: false |
-| shipname_id | integer | null: false |
+| shipping_id | integer | null: false |
 | shipdate_id | integer | null: false |
 | price       | integer | null: false |
 | user        | references | null: false, foreign_key: true |

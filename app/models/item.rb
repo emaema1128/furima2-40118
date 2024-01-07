@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
-  has_one :purchase
+  # has_one :purchase
   has_one_attached :image
 
   # validates :image, presence: true
@@ -11,8 +11,29 @@ class Item < ApplicationRecord
   # validates :freight_id, presence: true
   # validates :title, presence: true
   # validates :shipdate_id, presence: true
-  # validates :shipname_id, presence: true
+  # validates :shipping_id, presence: true
   # validates :price, presence: true
   # validates :title, presence: true
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
+  belongs_to :prefecture
+  belongs_to :freight
+  belongs_to :shipdate
+  belongs_to :shipping
+
+
+    #空の投稿を保存できないようにする
+    validates :title, :explain, :category_id, :prefecture_id,
+              :freight_id, :shipping_id, :shipdate_id,
+              :price,numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
+              presence: true
+
+    #ジャンルの選択が「---」の時は保存できないようにする
+    validates :category_id, numericality: { other_than: 0 , message: "can't be blank"}
+    validates :prefecture_id, numericality: { other_than: 0 , message: "can't be blank"}
+    validates :freight_id, numericality: { other_than: 0 , message: "can't be blank"}
+    validates :shipping_id, numericality: { other_than: 0 , message: "can't be blank"}
+    validates :shipdate_id, numericality: { other_than: 0 , message: "can't be blank"}
 
 end
