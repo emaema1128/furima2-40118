@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_06_124913) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_07_023652) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,6 +47,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_06_124913) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "items", charset: "utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "explain", null: false
+    t.integer "category_id", null: false
+    t.integer "prefecture_id", null: false
+    t.integer "freight_id", null: false
+    t.integer "shipname_id", null: false
+    t.integer "shipdate_id", null: false
+    t.integer "price", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
@@ -67,4 +82,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_06_124913) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "items", "users"
 end
