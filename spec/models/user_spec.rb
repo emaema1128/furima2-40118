@@ -85,8 +85,6 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Email is invalid')
       end
 
-      # エラー
-
       it 'パスワードは、6文字以上での入力が必須であること' do
         @user.password = 'test1'
         @user.password_confirmation = 'test1'
@@ -117,9 +115,6 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
-
-
-      # エラー
 
       it '姓（全角）に半角文字が含まれていると登録できない' do
         @user.last_name = 'ｱｱｱｱｱ'
