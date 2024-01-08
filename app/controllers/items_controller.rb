@@ -1,14 +1,27 @@
 class ItemsController < ApplicationController
-  # before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
 
-  # def index
-  # end
+  def index
+    # @items = Item.all
+  end
 
-  # def new
-  #   @items = Item.new
-  # end
+  def new
+     @item = Item.new
+  end
 
-  # def create
-  # end
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to '/'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
 
+
+
+  private
+  def item_params
+    params.require(:item).permit(:image, :title, :explain, :category_id, :prefecture_id, :freight_id, :shipping_id, :shipdate_id, :price).merge(user_id: current_user.id)
+  end
 end
