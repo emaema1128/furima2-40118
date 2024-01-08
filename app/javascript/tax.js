@@ -4,13 +4,13 @@ function tax (){
     const fee = itemPrice.value * 0.1;
     const addTaxPrice = document.getElementById("add-tax-price");
     addTaxPrice.innerHTML = `${fee}`;
-    console.log(addTaxPrice)
+    // console.log(addTaxPrice)
 
     const SalesProfit = itemPrice.value - fee;
     const profit = document.getElementById("profit");
     profit.innerHTML = `${SalesProfit}`;
 
-    console.log(profit)
+    // console.log(profit)
 
   });
 };
