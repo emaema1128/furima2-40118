@@ -16,3 +16,4 @@ function tax (){
 };
 
 window.addEventListener('load', tax);
+window.addEventListener("turbo:render", tax);
