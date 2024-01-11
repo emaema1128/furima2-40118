@@ -1,5 +1,6 @@
 class Address < ApplicationRecord
-
+  belongs_to :purchase
+  
   validates :postalcode, presence: true
   validates :prefecture_id, presence: true
   validates :city, presence: true
@@ -8,5 +9,5 @@ class Address < ApplicationRecord
   validates :phone_number, presence: true
   validates :price, presence: true
 
-  block
+  
 end
