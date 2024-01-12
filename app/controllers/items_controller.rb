@@ -3,11 +3,11 @@ class ItemsController < ApplicationController
   before_action :set_item, except: [:index, :new, :create ]
 
   def index
-     @items = Item.all.order("created_at DESC")
+    @items = Item.all.order("created_at DESC")
   end
 
   def new
-     @item = Item.new
+    @item = Item.new
   end
 
   def create
