@@ -6,17 +6,18 @@ class User < ApplicationRecord
   has_many :items
   has_many :purchases
   
-    validates :first_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
-    validates :last_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
-    validates :nickname, presence: true
-    validates :birthday, presence: true
-    
+  with_options presence: true do
+        # ひらがな、カタカナ、漢字のみ許可する
+    validates :last_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' } 
+    validates :first_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' } 
+        # カタカナのみ許可する
+    validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
+    validates :last_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
+    validates :nickname
+    validates :birthday
+  end
+  
     PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
     validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
     
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' } do
-    validates :last_name
-    validates :first_name
-  end
-
 end

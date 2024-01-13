@@ -3,11 +3,11 @@ class ItemsController < ApplicationController
   before_action :set_item, except: [:index, :new, :create ]
 
   def index
-     @items = Item.all.order("created_at DESC")
+    @items = Item.all.order("created_at DESC")
   end
 
   def new
-     @item = Item.new
+    @item = Item.new
   end
 
   def create
@@ -24,7 +24,9 @@ class ItemsController < ApplicationController
 
   def edit
     redirect_to root_path unless current_user.id == @item.user_id
-
+    if @item.purchase.present?
+      redirect_to root_path
+    end
   end
 
   def update
