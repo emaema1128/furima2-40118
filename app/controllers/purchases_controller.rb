@@ -5,6 +5,7 @@ class PurchasesController < ApplicationController
 
 
   def index
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @purchase_address = PurchaseAddress.new
   end
 
@@ -15,6 +16,7 @@ class PurchasesController < ApplicationController
       @purchase_address.save
       return redirect_to root_path
     else
+      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render 'index', status: :unprocessable_entity
     end
   end
